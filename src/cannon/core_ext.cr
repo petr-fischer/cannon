@@ -151,7 +151,7 @@ class Hash(K, V)
   end
 end
 
-struct Union(T)
+struct Union(*T)
   # Writes a value to *io*.
   def self.to_cannon_io(io, value)
     {% begin %}
@@ -219,7 +219,7 @@ struct Time
   include Cannon::FastAuto
 
   def self.from_cannon_io(io)
-    new(Cannon.decode(io, Int64))
+    new(unsafe_utc_seconds: Cannon.decode(io, Int64))
   end
 end
 
